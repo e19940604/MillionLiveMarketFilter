@@ -40,24 +40,34 @@
             <div class="text-center">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                        <li class="page-item">
-                            @if( $data->currentPage() !== 1 )
-                                <a class="page-link" href="{{ $data->previousPageUrl() }}" aria-label="Previous">
+                        @if( $data->currentPage() !== 1 )
+                            <li class="page-item">
+                        @else
+                            <li class="page-item disabled">
+                        @endif
+                                <a class="page-link " href="{{ $data->previousPageUrl() }}" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                     <span class="sr-only">Previous</span>
                                 </a>
-                            @endif
+
                         </li>
                         @foreach( $data->getUrlRange( 1 , $data->lastPage() )  as $pageNumber => $url )
-                            <li class="page-item"><a class="page-link" href="{{ $url }}">{{$pageNumber}}</a></li>
+                            @if( $pageNumber === $data->currentPage() )
+                                <li class="page-item active"><a class="page-link" href="{{ $url }}">{{$pageNumber}}</a></li>
+                            @else
+                                <li class="page-item"><a class="page-link" href="{{ $url }}">{{$pageNumber}}</a></li>
+                            @endif
                         @endforeach
-                        <li class="page-item">
-                            @if( $data->currentPage() !== $data->lastPage() )
+
+                        @if( $data->currentPage() !== $data->lastPage() )
+                            <li class="page-item">
+                        @else
+                            <li class="page-item disabled">
+                        @endif
                                 <a class="page-link" href="{{ $data->nextPageUrl() }}" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                     <span class="sr-only">Next</span>
                                 </a>
-                            @endif
                         </li>
                     </ul>
                 </nav>
