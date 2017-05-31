@@ -25,7 +25,7 @@ class BazaarService
                     'cost' => $card->cost,
                     'skill' => $card->skill,
                     'price' => $card->cardPrice,
-                    'postDate' => Carbon::now()->format("Y-m-d H:i:s"),
+                    'postDate' => Carbon::now('Asia/Taipei')->format("Y-m-d H:i:s"),
                     'transactionUrl' => $card->url,
                 ]);
             }
