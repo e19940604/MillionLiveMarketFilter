@@ -22,6 +22,10 @@ class MarketController extends Controller
 
         $this->bazaarService->insertPack( $data );
 
+        $response = [
+            'status' => 'success'
+        ];
+        return response( )->json( $response , 200);
 
     }
 }
