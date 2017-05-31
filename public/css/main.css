@@ -1,0 +1,63 @@
+
+.block-table {
+    width: 100%;
+}
+
+.tr:nth-child(even) {
+    background: #EEE;
+}
+
+.th , .tr{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.th .td {
+    padding-top:15px;
+    padding-bottom:15px;
+    border-bottom: 1px solid #eee;
+}
+
+.tr  .td {
+    height: 60px;
+}
+
+.tr .td img {
+    height: 60px;
+}
+
+.td:before{
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 100%;
+}
+
+.text{
+    display: inline-block;
+    vertical-align: middle;/* 保证文字垂直居中 */
+    margin-bottom: 0;
+}
+
+.pagination{
+    margin: auto 0;
+}
+
+
+@media (max-width: 768px){
+    .th{
+        display: none;
+    }
+
+    .td{
+        padding-top: 0;
+        padding-bottom: 0;
+        height: 30px !important;
+    }
+
+    .tr{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+}

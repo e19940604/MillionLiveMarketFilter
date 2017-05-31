@@ -32,4 +32,11 @@ class BazaarService
         }
 
     }
+
+    public function getIndexList( ){
+
+        $cardList = Bazaar::orderBy('postDate','desc')->paginate(15);
+
+        return $cardList;
+    }
 }

@@ -16,6 +16,8 @@ class MarketController extends Controller
         $this->bazaarService = $bazaarService;
     }
 
+    /** api **/
+
     public function listCreate( Request $request ){
 
         $data = json_decode( $request->get("data") );
@@ -26,6 +28,15 @@ class MarketController extends Controller
             'status' => 'success'
         ];
         return response( )->json( $response , 200);
+
+    }
+
+    /** web **/
+    public function showIndex(){
+
+        $cardList = $this->bazaarService->getIndexList();
+
+        return view('bazaar.index')->with('data', $cardList);
 
     }
 }
