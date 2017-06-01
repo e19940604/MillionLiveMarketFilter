@@ -25,6 +25,7 @@
 
 </head>
     <body>
+        @include('bazaar.analyticstracking')
         <div class="container">
             @yield('content')
         </div>
