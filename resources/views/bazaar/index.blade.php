@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-
+    @inject('bazaarPresenter' , 'MillionLiveMarketFilter\Presenters\BazaarPresenter')
     <div class="page-header">
         <h1>ミリオンライブ バザー</h1>
         <p class="lead">這是一個<del>沒有UI</del>的ML市場資料網站<!--，目前只有2線資料，有意願提供其他線資料的話請聯絡噗浪 @e19940604--> </p>
@@ -40,18 +40,16 @@
             <div class="text-center">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                        @if( $data->currentPage() !== 1 )
-                            <li class="page-item">
-                        @else
-                            <li class="page-item disabled">
-                        @endif
+                        {{ $bazaarPresenter->showPrePageIcon( $data->currentPage() ) }}
                                 <a class="page-link " href="{{ $data->previousPageUrl() }}" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                     <span class="sr-only">Previous</span>
                                 </a>
 
                         </li>
-                        @foreach( $data->getUrlRange( 1 , $data->lastPage() )  as $pageNumber => $url )
+
+
+                        @foreach( $data->getUrlRange( $bazaarPresenter->getUrlRange( $data->currentPage() , $data->lastPage() )[0] , $bazaarPresenter->getUrlRange( $data->currentPage() , $data->lastPage() )[1] )  as $pageNumber => $url )
                             @if( $pageNumber === $data->currentPage() )
                                 <li class="page-item active"><a class="page-link" href="{{ $url }}">{{$pageNumber}}</a></li>
                             @else
@@ -59,11 +57,8 @@
                             @endif
                         @endforeach
 
-                        @if( $data->currentPage() !== $data->lastPage() )
-                            <li class="page-item">
-                        @else
-                            <li class="page-item disabled">
-                        @endif
+
+                        {{ $bazaarPresenter->showLastPageIcon( $data->currentPage() , $data->lastPage()) }}
                                 <a class="page-link" href="{{ $data->nextPageUrl() }}" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                     <span class="sr-only">Next</span>
