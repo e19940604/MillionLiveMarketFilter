@@ -31,7 +31,7 @@
             <div class="td col-sm-1"><p class="text">{{ $row->cost }}</p></div>
             <div class="td col-sm-2"><p class="text">{{ $row->skill }}</p></div>
             <div class="td col-sm-3"><p class="text">{{ $row->price }}</p></div>
-            <div class="td col-sm-1"><p class="text"><a href="{{ $row->transactionUrl }}">バザー</a></p></div>
+            <div class="td col-sm-1"><p class="text"><a href="{{ $row->transactionUrl }}" onClick="ga('send', 'event', 'bazaar', 'checkPage', 'click')" >バザー</a></p></div>
             <div class="td col-sm-2"><p class="text">{{ $row->postDate }}</p></div>
             <div class="td col-sm-1"><p class="text">2</p></div>
         </div>
@@ -41,7 +41,7 @@
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
                         {{ $bazaarPresenter->showPrePageIcon( $data->currentPage() ) }}
-                                <a class="page-link " href="{{ $data->previousPageUrl() }}" aria-label="Previous">
+                                <a class="page-link " href="{{ $data->previousPageUrl() }}" onClick="ga('send', 'event', 'pagination', 'previous', 'click');" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                     <span class="sr-only">Previous</span>
                                 </a>
@@ -51,7 +51,7 @@
 
                         @foreach( $data->getUrlRange( $bazaarPresenter->getUrlRange( $data->currentPage() , $data->lastPage() )[0] , $bazaarPresenter->getUrlRange( $data->currentPage() , $data->lastPage() )[1] )  as $pageNumber => $url )
                             @if( $pageNumber === $data->currentPage() )
-                                <li class="page-item active"><a class="page-link" href="{{ $url }}">{{$pageNumber}}</a></li>
+                                <li class="page-item active"><a class="page-link" href="{{ $url }}"  onClick="ga('send', 'event', 'pagination', 'number', 'click')" >{{$pageNumber}}</a></li>
                             @else
                                 <li class="page-item"><a class="page-link" href="{{ $url }}">{{$pageNumber}}</a></li>
                             @endif
@@ -59,7 +59,7 @@
 
 
                         {{ $bazaarPresenter->showLastPageIcon( $data->currentPage() , $data->lastPage()) }}
-                                <a class="page-link" href="{{ $data->nextPageUrl() }}" aria-label="Next">
+                                <a class="page-link" href="{{ $data->nextPageUrl() }}"  onClick="ga('send', 'event', 'pagination', 'next', 'click')" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                     <span class="sr-only">Next</span>
                                 </a>
