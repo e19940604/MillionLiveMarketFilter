@@ -22,7 +22,8 @@ class BazaarPresenter
         } else {
             $end = $currentPage + 10;
         }
-
+        return [ $from , $end ];
+        //dd( $from , $end );
     }
 
     public function showPrePageIcon( $currentPage ){
