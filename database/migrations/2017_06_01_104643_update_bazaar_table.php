@@ -13,7 +13,7 @@ class UpdateBazaarTable extends Migration
      */
     public function up()
     {
-        Schema::table('bazaar', function(Blueprint $table){
+        Schema::table('Bazaar', function(Blueprint $table){
 
             $table->string('type', 2)->default('EX');
             $table->string('idolName', 16);
@@ -29,7 +29,7 @@ class UpdateBazaarTable extends Migration
      */
     public function down()
     {
-        Schema::table('bazaar', function(Blueprint $table){
+        Schema::table('Bazaar', function(Blueprint $table){
 
             $table->dropColumn('type');
             $table->dropColumn('idolName');
