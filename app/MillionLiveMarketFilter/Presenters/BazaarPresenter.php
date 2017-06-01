@@ -17,17 +17,12 @@ class BazaarPresenter
             $from = 1;
         }
 
-        if( $lastPage > 20 ){
-            if( $currentPage + 10 > $lastPage ){
-                $end = $currentPage + 10;
-            } else {
-                $end = $lastPage;
-            }
-        } else {
+        if( $currentPage + 10 > $lastPage ){
             $end = $lastPage;
+        } else {
+            $end = $currentPage + 10;
         }
 
-        return [ $from , $end ];
     }
 
     public function showPrePageIcon( $currentPage ){
