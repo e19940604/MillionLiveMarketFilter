@@ -10,5 +10,5 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/{page?}', 'MarketController@showIndex');
+Route::get('/{page?}', 'MarketController@showBazaar');
 Route::post('marketList', 'MarketController@listCreate');

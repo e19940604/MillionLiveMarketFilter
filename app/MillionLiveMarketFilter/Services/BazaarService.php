@@ -68,7 +68,7 @@ class BazaarService
         'ﾛｺ' => 'Vi',
     ];
 
-    public function insertPack( $data ){
+    public function insertPack( $data , $line ){
 
         foreach( $data as $card ){
             $record = Bazaar::find( $card->id );
@@ -103,7 +103,8 @@ class BazaarService
                     'type' => $idolType,
                     'idolName' => $idolName,
                     'skillRange' => $skillRange,
-                    'skillPower' => $skillPower
+                    'skillPower' => $skillPower,
+                    'line' => $line
                 ]);
             }
         }
