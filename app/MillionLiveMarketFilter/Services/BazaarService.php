@@ -113,6 +113,20 @@ class BazaarService
 
     public function getIndexList( ){
         $cardList = Bazaar::where('cost', '!=' , 99 )->orderBy('postDate','desc')->paginate(15);
+        return $cardList;
+    }
+
+    public function getIndexListWithLine( $line ){
+        $cardList = Bazaar::where('cost', '!=' , 99 )->where('line',$line)->orderBy('postDate','desc')->paginate(15);
+        return $cardList;
+    }
+
+    public function getNewestList( $line = -1 ){
+        if( $line === -1 ){
+            $cardList = Bazaar::where('cost', '!=' , 99 )->orderBy('postDate','desc')->take(15)->get();
+        } else {
+            $cardList = Bazaar::where('cost', '!=' , 99 )->where('line' , $line )->orderBy('postDate','desc')->take(15)->get();
+        }
 
         return $cardList;
     }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use MillionLiveMarketFilter\Repositories\BazaarRepository;
 use MillionLiveMarketFilter\Services\BazaarService;
+use MillionLiveMarketFilter\Services\LatestMarketDataEvent;
+use Sse\SSE;
 
 class MarketController extends Controller
 {
@@ -31,16 +33,30 @@ class MarketController extends Controller
 
     }
 
-    public function showIndex(){
-
+    public function firstNewList( SSE $sse ,  $currentFirstId , $line = -1 ){
+        \Log::info("here");
+        $sse->exec_limit = 0;
+        $sse->sleep_time = 5;
+        $sse->keep_alive_time = 600;
+        $sse->addEventListener('message', new LatestMarketDataEvent( $line , $currentFirstId ));
+        $sse->start();
     }
 
     /** web **/
-    public function showBazaar(){
 
+    public function showIndex(){
         $cardList = $this->bazaarService->getIndexList();
+
+        return view('million.bazaar')->with('data', $cardList);
+    }
+
+    public function showBazaar( $line ){
+
+        $cardList = $this->bazaarService->getIndexListWithLine( $line );
 
         return view('million.bazaar')->with('data', $cardList);
 
     }
+
+
 }
