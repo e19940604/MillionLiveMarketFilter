@@ -42,7 +42,7 @@ class MarketController extends Controller
         $sse = new SSE();
         $sse->exec_limit = 0;
         $sse->sleep_time = 15;
-        $sse->client_reconnect = 60;
+        $sse->client_reconnect = 10000;
         $sse->addEventListener('message', new LatestMarketDataEvent( $currentFirstId , $queryConstrict , $queryString));
         return $sse->createResponse();
     }
