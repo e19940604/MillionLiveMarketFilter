@@ -54,7 +54,7 @@ $(document).ready( function(){
             }
         };
 
-        source.addEventListener('error', function(e) {
+        evtSource.addEventListener('error', function(e) {
             if (e.readyState == evtSource.CLOSED) {
                 // Connection was closed.
                 evtSource.close();
