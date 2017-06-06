@@ -22,7 +22,7 @@ $(document).ready( function(){
         } else {
             data = window.location.search
         }
-        console.log(data);
+        //console.log(data);
 
         var evtSource = new EventSource("api/marketList" +data);
 
@@ -39,7 +39,7 @@ $(document).ready( function(){
 
             console.log( updateData );
             for( var key in updateData ){
-                console.log( key );
+                //console.log( key );
                 tableBody.append(
                     '<div class="row tr">' +
                         '<div class="td col-sm-2"><p class="text">' +  updateData[key].name  +'</p></div>' +

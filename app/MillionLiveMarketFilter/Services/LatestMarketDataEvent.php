@@ -40,7 +40,7 @@ class LatestMarketDataEvent implements Event
         $latest = $this->bazaarService->getIndexListWithConstrict( $this->queryConstrict , $this->url );
         $data = $latest->items();
         if( $data !== [] ){
-            if( $data[0]->id === $this->oldFirstTransactionId ){
+            if( $data[0]->id == $this->oldFirstTransactionId ){
 
                 //\Log::info("false");
                 return false;
