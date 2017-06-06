@@ -18,7 +18,7 @@
             <a class="panel-default" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"  aria-controls="collapseOne" aria-expanded="false">
                 <div class="panel-heading" role="tab" id="headingOne">
                     <h4 class="panel-title">
-                        Search panel
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 搜尋
                     </h4>
                 </div>
             </a>
@@ -222,5 +222,5 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset("js/serverPush.js") }}"></script>
+
 @endsection
