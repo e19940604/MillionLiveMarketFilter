@@ -37,7 +37,7 @@ $(document).ready( function(){
             var tableBody = $('#tbody');
             tableBody.empty();
 
-            console.log( updateData );
+            //console.log( updateData );
             for( var key in updateData ){
                 //console.log( key );
                 tableBody.append(
