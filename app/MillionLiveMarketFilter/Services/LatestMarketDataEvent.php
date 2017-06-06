@@ -42,14 +42,14 @@ class LatestMarketDataEvent implements Event
         if( $data !== [] ){
             if( $data[0]->id === $this->oldFirstTransactionId ){
 
-                \Log::info("false");
+                //\Log::info("false");
                 return false;
             }
             else
                 $this->oldFirstTransactionId = $data[0]->id;
         }
         $this->newData = $latest->items();
-        \Log::info("true");
+        //\Log::info("true");
         return true;
     }
 
@@ -60,7 +60,7 @@ class LatestMarketDataEvent implements Event
      */
     public function update()
     {
-        \Log::info("send");
+        //\Log::info("send");
         // TODO: Implement update() method.
         return json_encode( $this->newData );
     }

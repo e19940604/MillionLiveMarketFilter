@@ -41,7 +41,7 @@ class BazaarPresenter
     }
 
     public function fixPagination( $paginationUrl ){
-        \Log::info( str_replace("?page", "&page" ,  $paginationUrl) );
+        //\Log::info( str_replace("?page", "&page" ,  $paginationUrl) );
         return str_replace("?page", "&page" ,  $paginationUrl);
     }
 }

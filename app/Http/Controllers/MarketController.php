@@ -41,7 +41,7 @@ class MarketController extends Controller
 
         $sse = new SSE();
         $sse->exec_limit = 0;
-        $sse->sleep_time = 5;
+        $sse->sleep_time = 15;
         $sse->keep_alive_time = 600;
         $sse->addEventListener('message', new LatestMarketDataEvent( $currentFirstId , $queryConstrict , $queryString));
         return $sse->createResponse();
