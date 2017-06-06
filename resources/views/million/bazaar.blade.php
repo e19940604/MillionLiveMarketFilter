@@ -204,7 +204,7 @@
 
 
                         {{ $bazaarPresenter->showLastPageIcon( $data->currentPage() , $data->lastPage()) }}
-                                <a class="page-link" href="{{ $data->nextPageUrl() }}"  onClick="ga('send', 'event', 'pagination', 'next', 'click')" aria-label="Next">
+                                <a class="page-link" href="{{ $bazaarPresenter->fixPagination( $data->nextPageUrl() )  }}"  onClick="ga('send', 'event', 'pagination', 'next', 'click')" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                     <span class="sr-only">Next</span>
                                 </a>

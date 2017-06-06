@@ -14,8 +14,7 @@ use Illuminate\Http\Request;
 */
 Route::group( []  ,function(){
     Route::post('marketList', 'MarketController@listCreate');
-    Route::get('marketList', 'MarketController@firstNewList');
+    Route::get('marketList/{firstId?}/{name?}/{type?}/{idol?}/{cost?}/{skillPower?}/{line?}/{candyOrDrink?}/{page?}', 'MarketController@firstNewList');
 });
-
 
 

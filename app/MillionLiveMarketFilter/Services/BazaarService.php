@@ -150,7 +150,7 @@ class BazaarService
      *      candyOrDrink = ""
      * ]
      */
-    public function getIndexListWithConstrict( $constrict = [] ){
+    public function getIndexListWithConstrict( $constrict = [] , $url ){
 
         $skillPower = $this->skillPower;
         $cardList = Bazaar::where( function( $query ) use ($constrict , $skillPower ) {
@@ -177,6 +177,9 @@ class BazaarService
                 $query->where("candyOrDrink" , $constrict["candyOrDrink"]  );
 
         })->orderBy('postDate','desc')->paginate(15);
+
+
+        $cardList->withPath( "?" . $url);
 
         return $cardList;
 

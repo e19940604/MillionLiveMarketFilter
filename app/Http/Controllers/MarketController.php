@@ -47,8 +47,7 @@ class MarketController extends Controller
 
     /** web **/
 
-    public function showIndex( Request $request ){
-
+    public function showIndex( Request $request ){;
         $constrict = [
             "name" => $request->input('name' , "" ),
             "type" => $request->input('type' , "0" ),
@@ -59,7 +58,10 @@ class MarketController extends Controller
             "candyOrDrink" => $request->input('candyOrDrink' , "0")
         ];
 
-        $cardList = $this->bazaarService->getIndexListWithConstrict( $constrict );
+        $queryString = preg_replace( "/&page.*/" , "" , $request->getQueryString() );
+        \Log::info( $queryString );
+
+        $cardList = $this->bazaarService->getIndexListWithConstrict( $constrict , $queryString );
 
         return view('million.bazaar')->with('data', $cardList);
     }

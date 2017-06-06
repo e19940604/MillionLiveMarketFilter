@@ -38,6 +38,10 @@ class BazaarPresenter
             echo '<li class="page-item">';
         else
             echo '<li class="page-item disabled">';
+    }
 
+    public function fixPagination( $paginationUrl ){
+        \Log::info( str_replace("?page", "&page" ,  $paginationUrl) );
+        return str_replace("?page", "&page" ,  $paginationUrl);
     }
 }
