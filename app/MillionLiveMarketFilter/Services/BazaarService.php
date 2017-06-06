@@ -176,7 +176,7 @@ class BazaarService
             if( $constrict["candyOrDrink"] !== "0" )
                 $query->where("candyOrDrink" , $constrict["candyOrDrink"]  );
 
-        })->paginate(15);
+        })->orderBy('postDate','desc')->paginate(15);
 
         return $cardList;
 

@@ -137,8 +137,8 @@
                                 <div class="col-sm-8">
                                     <select class="form-control" name="candyOrDrink">
                                         <option value="0" >--全部--</option>
-                                        <option>スパークドリンク</option>
-                                        <option>バトルキャンディ</option>
+                                        <option value="1">スパークドリンク</option>
+                                        <option value="2">バトルキャンディ</option>
                                     </select>
                                 </div>
                             </div>
