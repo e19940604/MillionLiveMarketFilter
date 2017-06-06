@@ -169,19 +169,20 @@
             <div class="td col-sm-1">線路</div>
         </div>
 
-        @if( isset( $data ) )
-            @foreach( $data->items() as $row )
-        <div class="row tr">
-            <div class="td col-sm-2"><p class="text">{{ $row->name }}</p></div>
-            <div class="td col-sm-1"><p class="text">{{ $row->cost }}</p></div>
-            <div class="td col-sm-2"><p class="text">{{ $row->skill }}</p></div>
-            <div class="td col-sm-3"><p class="text">{{ $row->price }}</p></div>
-            <div class="td col-sm-1"><p class="text"><a href="{{ $row->transactionUrl }}" onClick="ga('send', 'event', 'bazaar', 'checkPage', 'click')" >バザー</a></p></div>
-            <div class="td col-sm-2"><p class="text">{{ $row->postDate }}</p></div>
-            <div class="td col-sm-1"><p class="text">2</p></div>
+        <div id="tbody">
+            @if( isset( $data ) )
+                @foreach( $data->items() as $row )
+            <div class="row tr">
+                <div class="td col-sm-2"><p class="text">{{ $row->name }}</p></div>
+                <div class="td col-sm-1"><p class="text">{{ $row->cost }}</p></div>
+                <div class="td col-sm-2"><p class="text">{{ $row->skill }}</p></div>
+                <div class="td col-sm-3"><p class="text">{{ $row->price }}</p></div>
+                <div class="td col-sm-1"><p class="text"><a href="{{ $row->transactionUrl }}" onClick="ga('send', 'event', 'bazaar', 'checkPage', 'click')" >バザー</a></p></div>
+                <div class="td col-sm-2"><p class="text">{{ $row->postDate }}</p></div>
+                <div class="td col-sm-1"><p class="text">2</p></div>
+            </div>
+                @endforeach
         </div>
-            @endforeach
-
             <div class="text-center">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">

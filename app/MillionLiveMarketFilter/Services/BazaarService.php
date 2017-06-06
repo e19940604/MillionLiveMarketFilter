@@ -150,7 +150,7 @@ class BazaarService
      *      candyOrDrink = ""
      * ]
      */
-    public function getIndexListWithConstrict( $constrict = [] , $url ){
+    public function getIndexListWithConstrict( $constrict , $url ){
 
         $skillPower = $this->skillPower;
         $cardList = Bazaar::where( function( $query ) use ($constrict , $skillPower ) {

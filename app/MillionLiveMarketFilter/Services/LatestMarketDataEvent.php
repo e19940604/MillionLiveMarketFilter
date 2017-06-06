@@ -14,18 +14,18 @@ use MillionLiveMarketFilter\Services\BazaarService;
 
 class LatestMarketDataEvent implements Event
 {
-    private $test;
-    private $line;
-    private $oldFirstTransctionId;
+    private $url;
+    private $oldFirstTransactionId;
     private $bazaarService;
     private $queryConstrict;
+    private $newData;
 
-    public function __construct( $line , $oldFirstTransactionId )
+    public function __construct( $oldFirstTransactionId  , $queryConstrict , $url  )
     {
-        $this->test = 10;
-        $this->line = $line;
         $this->oldFirstTransactionId = $oldFirstTransactionId;
         $this->bazaarService = new BazaarService();
+        $this->queryConstrict = $queryConstrict;
+        $this->url = $url;
     }
 
     /**
@@ -36,13 +36,21 @@ class LatestMarketDataEvent implements Event
     public function check()
     {
         // TODO: Implement check() method.
-        $this->test = $this->test-1;
-        \Log::info("check");
-        if( $this->test % 2 == 0)
-            return true;
-        else{
-            return false;
+
+        $latest = $this->bazaarService->getIndexListWithConstrict( $this->queryConstrict , $this->url );
+        $data = $latest->items();
+        if( $data !== [] ){
+            if( $data[0]->id === $this->oldFirstTransactionId ){
+
+                \Log::info("false");
+                return false;
+            }
+            else
+                $this->oldFirstTransactionId = $data[0]->id;
         }
+        $this->newData = $latest->items();
+        \Log::info("true");
+        return true;
     }
 
     /**
@@ -54,6 +62,6 @@ class LatestMarketDataEvent implements Event
     {
         \Log::info("send");
         // TODO: Implement update() method.
-        return "$this->test";
+        return json_encode( $this->newData );
     }
 }

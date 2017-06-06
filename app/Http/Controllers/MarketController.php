@@ -36,19 +36,34 @@ class MarketController extends Controller
 
     public function firstNewList( Request $request ){
         $currentFirstId = $request->input('firstId');
-        \Log::info( gettype( $currentFirstId ) );
-        /*$sse = new SSE();
+        $queryConstrict = $this->getConstrict( $request );
+        $queryString = preg_replace( "/&page.*/" , "" , $request->getQueryString() );
+
+        $sse = new SSE();
         $sse->exec_limit = 0;
         $sse->sleep_time = 5;
         $sse->keep_alive_time = 600;
-        $sse->addEventListener('message', new LatestMarketDataEvent( $currentFirstId , $queryConstrict ));
-        return $sse->createResponse();*/
+        $sse->addEventListener('message', new LatestMarketDataEvent( $currentFirstId , $queryConstrict , $queryString));
+        return $sse->createResponse();
     }
 
     /** web **/
 
     public function showIndex( Request $request ){;
-        $constrict = [
+
+        $constrict = $this->getConstrict( $request );
+
+        $queryString = preg_replace( "/&page.*/" , "" , $request->getQueryString() );
+        //\Log::info( $queryString );
+
+        $cardList = $this->bazaarService->getIndexListWithConstrict( $constrict , $queryString );
+
+        return view('million.bazaar')->with('data', $cardList);
+    }
+
+
+    private function getConstrict( $request ){
+        return [
             "name" => $request->input('name' , "" ),
             "type" => $request->input('type' , "0" ),
             "idol" => $request->input('idol' , "0" ),
@@ -58,13 +73,6 @@ class MarketController extends Controller
             "candyOrDrink" => $request->input('candyOrDrink' , "0")
         ];
 
-        $queryString = preg_replace( "/&page.*/" , "" , $request->getQueryString() );
-        \Log::info( $queryString );
-
-        $cardList = $this->bazaarService->getIndexListWithConstrict( $constrict , $queryString );
-
-        return view('million.bazaar')->with('data', $cardList);
     }
-
 
 }
