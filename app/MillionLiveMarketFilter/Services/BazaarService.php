@@ -92,6 +92,15 @@ class BazaarService
                         $skillRange = $match[0][0];
                 }
 
+                if( mb_strpos( $card->cardPrice , "バトルキャンディ") !== false ){
+                    $candyOrDrink = 2;
+                } else if (  mb_strpos( $card->cardPrice , "スパークドリンク") !== false ) {
+                    $candyOrDrink = 1;
+                } else {
+                    $candyOrDrink = 0;
+                }
+
+
                 Bazaar::create([
                     'id' => $card->id,
                     'name' => $card->name,
@@ -104,7 +113,8 @@ class BazaarService
                     'idolName' => $idolName,
                     'skillRange' => $skillRange,
                     'skillPower' => $skillPower,
-                    'line' => $line
+                    'line' => $line,
+                    'candyOrDrink' => $candyOrDrink
                 ]);
             }
         }

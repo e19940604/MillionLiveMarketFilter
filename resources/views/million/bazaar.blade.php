@@ -25,11 +25,13 @@
             <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
                     <form class="form-horizontal col-sm-12">
+                        <input type="hidden" name="firstId" value="{{ $data->items()[0]->id  }}">
+
                         <div class="row">
                             <div class="form-group">
                                 <label for="Card" class="col-sm-2 control-label">關鍵字</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="Card" placeholder="關鍵字" >
+                                    <input type="text" class="form-control" id="Card" name="name" placeholder="關鍵字" >
                                 </div>
                             </div>
                         </div>
@@ -38,19 +40,14 @@
                         <div class="row">
                             <div class="form-group">
                                 <label for="Card" class="col-sm-2 control-label">屬性</label>
+
                                 <div class="col-sm-10">
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="type[]" id="Vo" value="Vo"> Vo
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="type[]" id="Da" value="Da"> Da
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="type[]" id="Vi" value="Da"> Vi
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="type[]" id="Ex" value="Ex"> Ex
-                                    </label>
+                                    <select id="typeList" class="form-control" name="idol">
+                                        <option value="0" >--全部--</option>
+                                        <option value="Vo" >Vo</option>
+                                        <option value="Da" >Da</option>
+                                        <option value="Vi" >Vi</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -60,13 +57,8 @@
                             <div class="form-group">
                                 <label for="Card" class="col-sm-2 control-label">アイドル</label>
                                 <div class="col-sm-10">
-                                    <select class="form-control" name="idol">
-                                        <option value="0" >--請先選擇屬性--</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                    <select id="idolList" class="form-control" name="idol">
+                                        <option value="0" >--全部--</option>
                                     </select>
                                 </div>
                             </div>
@@ -77,114 +69,28 @@
                             <div class="form-group">
                                 <label for="Card" class="col-sm-2 control-label">Cost</label>
                                 <div class="col-sm-3">
-                                    <!--<label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost1" value="1"> 1
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost2" value="2"> 2
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost3" value="3"> 3
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost4" value="4"> 4
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost5" value="5"> 5
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost6" value="6"> 6
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost7" value="7"> 7
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost8" value="8"> 8
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost9" value="9"> 9
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost10" value="10"> 10
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost11" value="11"> 11
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost11" value="12"> 12
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost13" value="13"> 13
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost14" value="14"> 14
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost15" value="15"> 15
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost16" value="16"> 16
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost17" value="17"> 17
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost18" value="18"> 18
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost19" value="19"> 19
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="cost[]" id="cost20" value="20"> 20
-                                    </label>-->
-
                                     <select class="form-control" name="costUp">
-                                        <option value="0" >--最小cost--</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                        <option>7</option>
-                                        <option>8</option>
-                                        <option>9</option>
-                                        <option>10</option>
-                                        <option>11</option>
-                                        <option>12</option>
-                                        <option>13</option>
-                                        <option>14</option>
-                                        <option>15</option>
-                                        <option>16</option>
-                                        <option>17</option>
-                                        <option>18</option>
-                                        <option>19</option>
-                                        <option>20</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-3">
-                                    <select class="form-control" name="costDown">
-                                        <option value="0" >--最大cost--</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                        <option>7</option>
-                                        <option>8</option>
-                                        <option>9</option>
-                                        <option>10</option>
-                                        <option>11</option>
-                                        <option>12</option>
-                                        <option>13</option>
-                                        <option>14</option>
-                                        <option>15</option>
-                                        <option>16</option>
-                                        <option>17</option>
-                                        <option>18</option>
-                                        <option>19</option>
-                                        <option>20</option>
+                                        <option value="0" >--全部--</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
                                     </select>
                                 </div>
                             </div>
@@ -196,21 +102,14 @@
                             <div class="form-group">
                                 <label for="Card" class="col-sm-2 control-label">技能加成</label>
                                 <div class="col-sm-10">
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="skillRange[]" id="super" value="0"> 極大
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="skillRange[]" id="max" value="1"> 特大
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="skillRange[]" id="large" value="2"> 大
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="skillRange[]" id="medium" value="3"> 中
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="skillRange[]" id="small" value="4"> 小
-                                    </label>
+                                    <select class="form-control" name="costUp">
+                                        <option value="0" >--全部--</option>
+                                        <option value="5">極大</option>
+                                        <option value="4">特大</option>
+                                        <option value="3">大</option>
+                                        <option value="2">中</option>
+                                        <option value="1">小</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -222,10 +121,10 @@
                                 <div class="col-sm-10">
                                     <select class="form-control" name="idol">
                                         <option value="0" >--全線--</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
                                     </select>
                                 </div>
                             </div>
