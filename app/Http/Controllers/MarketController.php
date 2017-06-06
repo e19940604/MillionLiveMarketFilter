@@ -35,16 +35,16 @@ class MarketController extends Controller
     }
 
     public function firstNewList( Request $request ){
-        $currentFirstId = $request->input('firstId');
+        /*$currentFirstId = $request->input('firstId');
         $queryConstrict = $this->getConstrict( $request );
-        $queryString = preg_replace( "/&page.*/" , "" , $request->getQueryString() );
+        $queryString = preg_replace( "/&page.*//*" , "" , $request->getQueryString() );*/
 
-        $sse = new SSE();
+        /*$sse = new SSE();
         $sse->exec_limit = 0;
         $sse->sleep_time = 15;
         $sse->client_reconnect = 10000;
         $sse->addEventListener('message', new LatestMarketDataEvent( $currentFirstId , $queryConstrict , $queryString));
-        return $sse->createResponse();
+        return $sse->createResponse();*/
     }
 
     /** web **/
