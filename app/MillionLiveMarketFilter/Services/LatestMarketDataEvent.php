@@ -18,6 +18,7 @@ class LatestMarketDataEvent implements Event
     private $line;
     private $oldFirstTransctionId;
     private $bazaarService;
+    private $queryConstrict;
 
     public function __construct( $line , $oldFirstTransactionId )
     {
@@ -36,6 +37,7 @@ class LatestMarketDataEvent implements Event
     {
         // TODO: Implement check() method.
         $this->test = $this->test-1;
+        \Log::info("check");
         if( $this->test % 2 == 0)
             return true;
         else{
@@ -50,6 +52,7 @@ class LatestMarketDataEvent implements Event
      */
     public function update()
     {
+        \Log::info("send");
         // TODO: Implement update() method.
         return "$this->test";
     }

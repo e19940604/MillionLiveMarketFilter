@@ -68,6 +68,14 @@ class BazaarService
         'ﾛｺ' => 'Vi',
     ];
 
+    private $skillPower = [
+        "1" => "小",
+        "2" => "中",
+        "3" => "大",
+        "4" => "特大",
+        "5" => "極大"
+    ];
+
     public function insertPack( $data , $line ){
 
         foreach( $data as $card ){
@@ -129,6 +137,49 @@ class BazaarService
     public function getIndexListWithLine( $line ){
         $cardList = Bazaar::where('cost', '!=' , 99 )->where('line',$line)->orderBy('postDate','desc')->paginate(15);
         return $cardList;
+    }
+
+    /**
+     * @param array $constrict = [
+     *      name = "",
+     *      type = "",
+     *      idol = "",
+     *      cost = "",
+     *      skillPower = ""
+     *      line = "",
+     *      candyOrDrink = ""
+     * ]
+     */
+    public function getIndexListWithConstrict( $constrict = [] ){
+
+        $skillPower = $this->skillPower;
+        $cardList = Bazaar::where( function( $query ) use ($constrict , $skillPower ) {
+            $query->where('cost', '!=' , 99 );
+
+            if(  $constrict["name"] !== "" )
+                $query->where("name" , "like" , "%" . $constrict['name'] . "%" );
+
+            if( $constrict["type"] !== "0" )
+                $query->where("type", $constrict["type"] );
+
+            //if( $constrict["idol"] !== "0" )
+
+            if( $constrict["cost"] !== "0" )
+                $query->where("cost" , $constrict["cost"] );
+
+            if( $constrict["skillPower"] !== "0" )
+                $query->where("skillPower" , $skillPower[ $constrict["skillPower"] ]  );
+
+            if( $constrict["line"] !== "0" )
+                $query->where("line" , $constrict["line"]  );
+
+            if( $constrict["candyOrDrink"] !== "0" )
+                $query->where("candyOrDrink" , $constrict["candyOrDrink"]  );
+
+        })->paginate(15);
+
+        return $cardList;
+
     }
 
     public function getNewestList( $line = -1 ){

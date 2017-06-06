@@ -13,16 +13,24 @@ var getUrlParameter = function getUrlParameter(sParam) {
     }
 };
 
-// only on first page run server push event
-if( getUrlParameter('page') === '1' || getUrlParameter('page') === undefined ){
-    console.log("here");
-    var evtSource = new EventSource("api/marketList/test/1");
+$(document).ready( function(){
+    if( getUrlParameter('page') === '1' || getUrlParameter('page') === undefined ){
+        var data = "";
+        if( window.location.search === "" ){
+            data = "?firstId=" +  $("#firstId").val() + "&name=&type=0&idol=0&cost=0&skillPower=0&line=0&candyOrDrink=0";
+        } else {
+            data = window.location.search
+        }
+        console.log(data);
 
-    evtSource.onmessage = function(e) {
-        console.log( e.data );
-    };
+        var evtSource = new EventSource("api/marketList" +data);
 
-    window.onbeforeunload = function(){
-        evtSource.close();
-    };
-}
+        window.beforeunload = function(){
+            evtSource.close();
+        };
+        evtSource.onmessage = function(e) {
+            console.log( e.data );
+            evtSource.close();
+        };
+    }
+} );

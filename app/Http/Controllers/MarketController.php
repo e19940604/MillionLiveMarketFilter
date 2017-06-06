@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use MillionLiveMarketFilter\Repositories\BazaarRepository;
 use MillionLiveMarketFilter\Services\BazaarService;
 use MillionLiveMarketFilter\Services\LatestMarketDataEvent;
@@ -33,29 +34,34 @@ class MarketController extends Controller
 
     }
 
-    public function firstNewList( SSE $sse ,  $currentFirstId , $line = -1 ){
-        \Log::info("here");
+    public function firstNewList( Request $request ){
+        $currentFirstId = $request->input('firstId');
+        \Log::info( gettype( $currentFirstId ) );
+        /*$sse = new SSE();
         $sse->exec_limit = 0;
         $sse->sleep_time = 5;
         $sse->keep_alive_time = 600;
-        $sse->addEventListener('message', new LatestMarketDataEvent( $line , $currentFirstId ));
-        $sse->start();
+        $sse->addEventListener('message', new LatestMarketDataEvent( $currentFirstId , $queryConstrict ));
+        return $sse->createResponse();*/
     }
 
     /** web **/
 
-    public function showIndex(){
-        $cardList = $this->bazaarService->getIndexList();
+    public function showIndex( Request $request ){
+
+        $constrict = [
+            "name" => $request->input('name' , "" ),
+            "type" => $request->input('type' , "0" ),
+            "idol" => $request->input('idol' , "0" ),
+            "cost" => $request->input('cost' , "0" ),
+            "skillPower" => $request->input('skillPower' , "0"),
+            "line" => $request->input('line' , "0"),
+            "candyOrDrink" => $request->input('candyOrDrink' , "0")
+        ];
+
+        $cardList = $this->bazaarService->getIndexListWithConstrict( $constrict );
 
         return view('million.bazaar')->with('data', $cardList);
-    }
-
-    public function showBazaar( $line ){
-
-        $cardList = $this->bazaarService->getIndexListWithLine( $line );
-
-        return view('million.bazaar')->with('data', $cardList);
-
     }
 
 

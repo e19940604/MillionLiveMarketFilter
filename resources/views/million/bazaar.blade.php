@@ -24,13 +24,13 @@
             </a>
             <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
-                    <form class="form-horizontal col-sm-12">
-                        <input type="hidden" name="firstId" value="{{ $data->items()[0]->id  }}">
+                    <form id="search-form" class="form-horizontal col-sm-12">
+                        <input type="hidden" id="firstId" name="firstId" value="{{ isset( $data->items()[0]->id ) ? $data->items()[0]->id : 0  }}">
 
                         <div class="row">
                             <div class="form-group">
                                 <label for="Card" class="col-sm-2 control-label">關鍵字</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
                                     <input type="text" class="form-control" id="Card" name="name" placeholder="關鍵字" >
                                 </div>
                             </div>
@@ -41,8 +41,8 @@
                             <div class="form-group">
                                 <label for="Card" class="col-sm-2 control-label">屬性</label>
 
-                                <div class="col-sm-10">
-                                    <select id="typeList" class="form-control" name="idol">
+                                <div class="col-sm-8">
+                                    <select id="typeList" class="form-control" name="type">
                                         <option value="0" >--全部--</option>
                                         <option value="Vo" >Vo</option>
                                         <option value="Da" >Da</option>
@@ -56,7 +56,7 @@
                         <div class="row">
                             <div class="form-group">
                                 <label for="Card" class="col-sm-2 control-label">アイドル</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
                                     <select id="idolList" class="form-control" name="idol">
                                         <option value="0" >--全部--</option>
                                     </select>
@@ -68,8 +68,8 @@
                         <div class="row">
                             <div class="form-group">
                                 <label for="Card" class="col-sm-2 control-label">Cost</label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" name="costUp">
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="cost">
                                         <option value="0" >--全部--</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -101,8 +101,8 @@
                         <div class="row">
                             <div class="form-group">
                                 <label for="Card" class="col-sm-2 control-label">技能加成</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control" name="costUp">
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="skillPower">
                                         <option value="0" >--全部--</option>
                                         <option value="5">極大</option>
                                         <option value="4">特大</option>
@@ -118,8 +118,8 @@
                         <div class="row">
                             <div class="form-group">
                                 <label for="Card" class="col-sm-2 control-label">世界線</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control" name="idol">
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="line">
                                         <option value="0" >--全線--</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -134,8 +134,8 @@
                         <div class="row">
                             <div class="form-group">
                                 <label for="Card" class="col-sm-2 control-label">希望品</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control" name="idol">
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="candyOrDrink">
                                         <option value="0" >--全部--</option>
                                         <option>スパークドリンク</option>
                                         <option>バトルキャンディ</option>
@@ -145,7 +145,7 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-sm-offset-11 col-sm-1 ">
+                            <div class="col-sm-offset-9 col-sm-1 ">
                                 <button type="submit" class="btn btn-default">搜尋</button>
                             </div>
                         </div>
