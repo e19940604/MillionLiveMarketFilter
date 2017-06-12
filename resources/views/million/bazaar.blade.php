@@ -179,7 +179,7 @@
                 <div class="td col-sm-3"><p class="text">{{ $row->price }}</p></div>
                 <div class="td col-sm-1"><p class="text"><a href="{{ $row->transactionUrl }}" onClick="ga('send', 'event', 'bazaar', 'checkPage', 'click')" >バザー</a></p></div>
                 <div class="td col-sm-2"><p class="text">{{ $row->postDate }}</p></div>
-                <div class="td col-sm-1"><p class="text">2</p></div>
+                <div class="td col-sm-1"><p class="text">{{ $row->line }}</p></div>
             </div>
                 @endforeach
         </div>
