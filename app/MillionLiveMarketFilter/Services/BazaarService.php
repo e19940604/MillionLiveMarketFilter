@@ -72,7 +72,7 @@ class BazaarService
         9=>"秋月律子",
         1=>"天海春香",
         16=>"伊吹翼",
-        32=>"ｴﾐﾘ",
+        32=>"ｴﾐﾘ-",
         40=>"大神環",
         51=>"音無小鳥",
         14=>"春日未来",
@@ -138,6 +138,9 @@ class BazaarService
                 $skillPower = null;
                 $skillRange = null;
                 $split = explode(" ", $card->name );
+                if( count($split) === 1 )
+                    $split = $split = explode("　", $card->name );
+                
                 $idolName = end( $split );
                 if( isset($this->idolType[$idolName]) )
                     $idolType = $this->idolType[$idolName];
