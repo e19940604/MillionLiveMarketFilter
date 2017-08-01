@@ -16,15 +16,17 @@ class SendPlurk implements ShouldQueue
     private $plurk_id;
     private $bazaarRecord;
     private $plurk;
+    private $line;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct( $plurk_id , $bazaarRecord )
+    public function __construct( $plurk_id , $bazaarRecord , $line )
     {
         $this->plurk_id = $plurk_id;
         $this->bazaarRecord = $bazaarRecord;
+        $this->line = $line;
         $this->plurk = new PlurkApi();
     }
 
