@@ -37,7 +37,7 @@ class SendPlurk implements ShouldQueue
      */
     public function handle()
     {
-        $content = $this->bazaarRecord->name . " 在 " . $this->bazaarRecord->line . " 線，" . $this->bazaarRecord->cardPrice . "。網址：" . $this->bazaarRecord->url ;
+        $content = $this->bazaarRecord->name . " 在 " . $this->line . " 線，" . $this->bazaarRecord->cardPrice . "。網址：" . $this->bazaarRecord->url ;
 
         $payload = [
             "content" => rawurlencode( $content ),
