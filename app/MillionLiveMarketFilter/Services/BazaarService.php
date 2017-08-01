@@ -188,7 +188,7 @@ class BazaarService
 
                 foreach( $searchTable as $row ){
                     if( $card->name == $row->card_name ){
-                        dispatch( new SendPlurk( $row , $card , $line  ) );
+                        dispatch( new SendPlurk( $row->plurk_id , $card , $line  ) );
                     }
                 }
 
