@@ -41,7 +41,7 @@ class PlurkApi
 
         $res = $client->request( $method , $fullURL );
         $response = $res->getBody()->getContents();
-        dd( \GuzzleHttp\json_decode( $response ));
+        //dd( \GuzzleHttp\json_decode( $response ));
     }
 
 
