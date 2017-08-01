@@ -9,8 +9,10 @@
 namespace MillionLiveMarketFilter\Services;
 
 
+use App\Jobs\SendPlurk;
 use Carbon\Carbon;
 use MillionLiveMarketFilter\Bazaar;
+use MillionLiveMarketFilter\SearchTable;
 
 class BazaarService
 {
@@ -132,6 +134,8 @@ class BazaarService
 
     public function insertPack( $data , $line ){
 
+        $searchTable = \MillionLiveMarketFilter\SearchTable::all();
+
         foreach( $data as $card ){
             $record = Bazaar::find( $card->id );
             if( $record === null ){
@@ -140,7 +144,7 @@ class BazaarService
                 $split = explode(" ", $card->name );
                 if( count($split) === 1 )
                     $split = $split = explode("　", $card->name );
-                
+
                 $idolName = end( $split );
                 if( isset($this->idolType[$idolName]) )
                     $idolType = $this->idolType[$idolName];
@@ -181,6 +185,14 @@ class BazaarService
                     'line' => $line,
                     'candyOrDrink' => $candyOrDrink
                 ]);
+
+                foreach( $searchTable as $row ){
+                    if( $card->name == $row->card_name ){
+                        dispatch( new SendPlurk( $row , $card  ) );
+                    }
+                }
+
+
             }
         }
 

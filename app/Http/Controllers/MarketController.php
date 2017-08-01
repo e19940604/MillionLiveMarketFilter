@@ -7,16 +7,19 @@ use Illuminate\Support\Facades\Input;
 use MillionLiveMarketFilter\Repositories\BazaarRepository;
 use MillionLiveMarketFilter\Services\BazaarService;
 use MillionLiveMarketFilter\Services\LatestMarketDataEvent;
+use MillionLiveMarketFilter\Services\PlurkApi;
 use Sse\SSE;
 
 class MarketController extends Controller
 {
     private $bazaarRepository;
     private $bazaarService;
+    private $plurk;
 
-    public function __construct( BazaarRepository $bazaarRepository , BazaarService $bazaarService ){
+    public function __construct( BazaarRepository $bazaarRepository , BazaarService $bazaarService , PlurkApi $plurk ){
         $this->bazaarRepository = $bazaarRepository;
         $this->bazaarService = $bazaarService;
+        $this->plurk = $plurk;
     }
 
     /** api **/
@@ -73,6 +76,18 @@ class MarketController extends Controller
             "candyOrDrink" => $request->input('candyOrDrink' , "0")
         ];
 
+    }
+
+    public function test(){
+        $p = [
+            "content" => rawurlencode('testl12345 '),
+            "qualifier" => 0,
+            "limited_to" => urlencode("[]"),
+            "no_comments" => 0,
+            "lang" => "en",
+            "replurkable" => 1
+        ];
+        $this->plurk->plurk("POST", "https://www.plurk.com/APP/Timeline/plurkAdd" , $p );
     }
 
 }
