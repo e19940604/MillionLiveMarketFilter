@@ -241,12 +241,18 @@ class BazaarService
             if( $constrict["skillPower"] !== "0" )
                 $query->where("skillPower" , $skillPower[ $constrict["skillPower"] ]  );
 
-            if( $constrict["line"] !== "0" )
-                $query->where("line" , $constrict["line"]  );
-
             if( $constrict["candyOrDrink"] !== "0" )
                 $query->where("candyOrDrink" , $constrict["candyOrDrink"]  );
 
+            if( $constrict["range"] !== "0"){
+                if( $constrict["range"] == "1" )
+                    $query->where("skillRange" , null  );
+                else
+                    $query->where("skillRange" , $constrict["range"]  );
+            }
+
+
+            $query->whereBetween("line" , [2,3] );
         })->orderBy('postDate','desc')->paginate(15);
 
 
