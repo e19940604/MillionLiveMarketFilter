@@ -73,6 +73,7 @@ class MarketController extends Controller
             "cost" => $request->input('cost' , "0" ),
             "skillPower" => $request->input('skillPower' , "0"),
             "line" => $request->input('line' , "0"),
+            "range" => $request->input('range' , "0"),
             "candyOrDrink" => $request->input('candyOrDrink' , "0")
         ];
 

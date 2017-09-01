@@ -112,7 +112,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- skill power -->
                         <div class="row">
                             <div class="form-group">

@@ -247,6 +247,14 @@ class BazaarService
             if( $constrict["candyOrDrink"] !== "0" )
                 $query->where("candyOrDrink" , $constrict["candyOrDrink"]  );
 
+            if( $constrict["range"] !== "0"){
+                if( $constrict["range"] == "1" )
+                    $query->where("skillRange" , null  );
+                else
+                    $query->where("skillRange" , $constrict["range"]  );
+            }
+
+
         })->orderBy('postDate','desc')->paginate(15);
 
 
