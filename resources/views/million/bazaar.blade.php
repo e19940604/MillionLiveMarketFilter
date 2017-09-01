@@ -96,7 +96,23 @@
                             </div>
                         </div>
 
+                        <!-- line -->
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="Card" class="col-sm-2 control-label">技能範圍</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="range">
+                                        <option value="0" >--無指定--</option>
+                                        <option value="">無技能</option>
+                                        <option value="AP">AP</option>
+                                        <option value="DP">DP</option>
+                                        <option value="AP/DP">AP/DP</option>
 
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <!-- skill power -->
                         <div class="row">
                             <div class="form-group">
