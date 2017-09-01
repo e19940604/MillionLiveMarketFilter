@@ -138,33 +138,37 @@ class BazaarService
 
         foreach( $data as $card ){
             $record = Bazaar::find( $card->id );
-            if( $record === null ){
+            if( $record === null ) {
                 $skillPower = null;
                 $skillRange = null;
-                $split = explode(" ", $card->name );
-                if( count($split) === 1 )
-                    $split = $split = explode("　", $card->name );
+                $split = explode(" ", $card->name);
+                if (count($split) === 1)
+                    $split = $split = explode("　", $card->name);
 
-                $idolName = end( $split );
-                if( isset($this->idolType[$idolName]) )
+                $idolName = end($split);
+                if (isset($this->idolType[$idolName]))
                     $idolType = $this->idolType[$idolName];
                 else
                     $idolType = 'EX';
 
-                if( $card->skill !== null ){
-                    $result = preg_match('/(極大)|(特大)|(大)|(中)|(小)/', $card->skill , $match , PREG_OFFSET_CAPTURE);
-                    if( $result === 1 )
+                if ($card->skill !== null) {
+                    $result = preg_match('/(極大)|(特大)|(大)|(中)|(小)/', $card->skill, $match, PREG_OFFSET_CAPTURE);
+                    if ($result === 1)
                         $skillPower = $match[0][0];
 
-                    $result = preg_match('/(AP\/DP)|(AP)|(DP)/' , $card->skill  , $match , PREG_OFFSET_CAPTURE );
-                    if( $result === 1 )
+                    $result = preg_match('/(AP\/DP)|(AP)|(DP)/', $card->skill, $match, PREG_OFFSET_CAPTURE);
+                    if ($result === 1)
                         $skillRange = $match[0][0];
                 }
 
-                if( mb_strpos( $card->cardPrice , "バトルキャンディ") !== false ){
+                if (mb_strpos($card->cardPrice, "バトルキャンディ") !== false) {
                     $candyOrDrink = 2;
-                } else if (  mb_strpos( $card->cardPrice , "スパークドリンク") !== false ) {
+                    preg_match('/\([0-9]*\)/', $card->cardPrice, $match, PREG_OFFSET_CAPTURE);
+                    $price = substr($match[0][0], 1, -1);
+                } else if (mb_strpos($card->cardPrice, "スパークドリンク") !== false) {
                     $candyOrDrink = 1;
+                    preg_match('/\([0-9]*\)/', $card->cardPrice, $match, PREG_OFFSET_CAPTURE);
+                    $price = substr($match[0][0], 1, -1);
                 } else {
                     $candyOrDrink = 0;
                 }
@@ -186,13 +190,22 @@ class BazaarService
                     'candyOrDrink' => $candyOrDrink
                 ]);
 
-                foreach( $searchTable as $row ){
-                    if( $card->name == $row->card_name ){
-                        dispatch( new SendPlurk( $row->plurk_id , $card , $line  ) );
-                    }
+                foreach ($searchTable as $row) {
+                    if ($row->card_name && $card->name != $row->card_name)
+                        continue;
+                    if ($row->candy_or_drink && $card->candyOrDrink != $row->candy_or_drink)
+                        continue;
+                    if ($row->skill && $card->skillPower != $row->skill)
+                        continue;
+                    if ($row->cost && $card->cost != $row->cost)
+                        continue;
+                    if ($row->price_less_than && $row->price_less_than <= $price)
+                        continue;
+
+                    dispatch(new SendPlurk($row->plurk_id, $card, $line));
+
+
                 }
-
-
             }
         }
 
