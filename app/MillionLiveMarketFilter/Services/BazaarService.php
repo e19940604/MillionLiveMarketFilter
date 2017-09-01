@@ -251,8 +251,9 @@ class BazaarService
                     $query->where("skillRange" , $constrict["range"]  );
             }
 
-
-            $query->whereBetween("line" , [2,3] );
+            if( $constrict["line"] !== "0" )
+                $query->where("line" , $constrict["line"]  );
+            
         })->orderBy('postDate','desc')->paginate(15);
 
 
