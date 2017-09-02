@@ -199,24 +199,24 @@ class BazaarService
                             continue;
                         }
                         if ($row->candy_or_drink && $candyOrDrink != $row->candy_or_drink) {
-                            \Log::info( candy_or_drink );
+                            //\Log::info( $candyOrDrink );
                             continue;
                         }
                         if ($row->skill && $skillPower != $row->skill) {
-                            \Log::info( $skillPower );
+                           // \Log::info( $skillPower );
                             continue;
                         }
                         if ($row->cost && $card->cost != $row->cost) {
-                            \Log::info( $card->cost );
+                          //  \Log::info( $card->cost );
                             continue;
                         }
                         if ($row->price_less_than && $row->price_less_than < $price) {
-                            \Log::info( $price );
+                           // \Log::info( $price );
                             continue;
                         }
 
                         if ($row->range && $row->range != $skillRange) {
-                            \Log::info( $skillRange );
+                           // \Log::info( $skillRange );
                             continue;
                         }
 
