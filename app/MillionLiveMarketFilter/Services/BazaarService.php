@@ -198,7 +198,8 @@ class BazaarService
 
                             continue;
                         }
-                        if ($row->candy_or_drink && $candyOrDrink != $row->candy_or_drink) {
+
+                        if ( $row->candy_or_drink !== null && $candyOrDrink != $row->candy_or_drink) {
                             //\Log::info( $candyOrDrink );
                             continue;
                         }
@@ -220,7 +221,6 @@ class BazaarService
                            // \Log::info( $price );
                             continue;
                         }
-
 
 
                         dispatch(new SendPlurk($row->plurk_id, $card, $line));
