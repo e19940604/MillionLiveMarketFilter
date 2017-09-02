@@ -222,7 +222,7 @@ class BazaarService
 
                         dispatch(new SendPlurk($row->plurk_id, $card, $line));
                     }
-                    //\DB::commit();
+                    \DB::commit();
                 } catch(\Exception $e ){
                     \DB::rollBack();
                     \Log::error( $e->getMessage() );
