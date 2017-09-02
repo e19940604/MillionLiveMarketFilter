@@ -39,6 +39,9 @@ class SendPlurk implements ShouldQueue
     {
         $content = $this->bazaarRecord->name . " 在 " . $this->line . " 線，" . $this->bazaarRecord->cardPrice . "。\n網址：" . $this->bazaarRecord->url ;
 
+        if( $this->plurk_id == "5574239" )
+            $content = "@e19940604 " . $content;
+        
         $payload = [
             "content" => rawurlencode( $content ),
             "qualifier" => 0,
