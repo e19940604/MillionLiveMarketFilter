@@ -210,15 +210,18 @@ class BazaarService
                           //  \Log::info( $card->cost );
                             continue;
                         }
-                        if ($row->price_less_than && $row->price_less_than < $price) {
+
+                        if ($row->range && $row->range != $skillRange) {
+                            // \Log::info( $skillRange );
+                            continue;
+                        }
+
+                        if ($row->price_less_than && ( $candyOrDrink == 0 || $row->price_less_than < $price ) ) {
                            // \Log::info( $price );
                             continue;
                         }
 
-                        if ($row->range && $row->range != $skillRange) {
-                           // \Log::info( $skillRange );
-                            continue;
-                        }
+
 
                         dispatch(new SendPlurk($row->plurk_id, $card, $line));
                     }
