@@ -174,38 +174,60 @@ class BazaarService
                 }
 
 
-                Bazaar::create([
-                    'id' => $card->id,
-                    'name' => $card->name,
-                    'cost' => $card->cost,
-                    'skill' => $card->skill,
-                    'price' => $card->cardPrice,
-                    'postDate' => Carbon::now('Asia/Taipei')->format("Y-m-d H:i:s"),
-                    'transactionUrl' => $card->url,
-                    'type' => $idolType,
-                    'idolName' => $idolName,
-                    'skillRange' => $skillRange,
-                    'skillPower' => $skillPower,
-                    'line' => $line,
-                    'candyOrDrink' => $candyOrDrink
-                ]);
+                try{
+                    \DB::beginTransaction();
 
-                foreach ($searchTable as $row) {
-                    if ($row->card_name && $card->name != $row->card_name)
-                        continue;
-                    if ($row->candy_or_drink && $card->candyOrDrink != $row->candy_or_drink)
-                        continue;
-                    if ($row->skill && $card->skillPower != $row->skill)
-                        continue;
-                    if ($row->cost && $card->cost != $row->cost)
-                        continue;
-                    if ($row->price_less_than && $row->price_less_than <= $price)
-                        continue;
+                    Bazaar::create([
+                        'id' => $card->id,
+                        'name' => $card->name,
+                        'cost' => $card->cost,
+                        'skill' => $card->skill,
+                        'price' => $card->cardPrice,
+                        'postDate' => Carbon::now('Asia/Taipei')->format("Y-m-d H:i:s"),
+                        'transactionUrl' => $card->url,
+                        'type' => $idolType,
+                        'idolName' => $idolName,
+                        'skillRange' => $skillRange,
+                        'skillPower' => $skillPower,
+                        'line' => $line,
+                        'candyOrDrink' => $candyOrDrink
+                    ]);
 
-                    dispatch(new SendPlurk($row->plurk_id, $card, $line));
+                    foreach ($searchTable as $row) {
+                        if ($row->card_name && $card->name != $row->card_name) {
 
+                            continue;
+                        }
+                        if ($row->candy_or_drink && $candyOrDrink != $row->candy_or_drink) {
+                            \Log::info( candy_or_drink );
+                            continue;
+                        }
+                        if ($row->skill && $skillPower != $row->skill) {
+                            \Log::info( $skillPower );
+                            continue;
+                        }
+                        if ($row->cost && $card->cost != $row->cost) {
+                            \Log::info( $card->cost );
+                            continue;
+                        }
+                        if ($row->price_less_than && $row->price_less_than < $price) {
+                            \Log::info( $price );
+                            continue;
+                        }
 
+                        if ($row->range && $row->range != $skillRange) {
+                            \Log::info( $skillRange );
+                            continue;
+                        }
+
+                        dispatch(new SendPlurk($row->plurk_id, $card, $line));
+                    }
+                    //\DB::commit();
+                } catch(\Exception $e ){
+                    \DB::rollBack();
+                    \Log::error( $e->getMessage() );
                 }
+
             }
         }
 
