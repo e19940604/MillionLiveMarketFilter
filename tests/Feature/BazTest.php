@@ -17,9 +17,9 @@ class BazTest extends TestCase
         $bazaarService =  $this->app->make( \MillionLiveMarketFilter\Services\BazaarService::class );
         $data = json_encode( [[
             'id' => '00000',
-            'name' => 'わたわたﾍﾞ-ｼｽﾄ 高槻やよい',
+            'name' => 'お手製ﾈｯｸﾚｽ ﾛｺ',
             'skill' => 'Vo属性のAP/DPｱｯﾌﾟ(極大)',
-            'cardPrice' => 'スパークドリンク (122)',
+            'cardPrice' => 'スパークドリンク (12)',
             'cost' => '11',
             'url' => 'xx',
         ]] );

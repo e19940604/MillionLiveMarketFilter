@@ -12,6 +12,7 @@ namespace MillionLiveMarketFilter\Services;
 use App\Jobs\SendPlurk;
 use Carbon\Carbon;
 use MillionLiveMarketFilter\Bazaar;
+use MillionLiveMarketFilter\SearchBlackList;
 use MillionLiveMarketFilter\SearchTable;
 
 class BazaarService
@@ -135,6 +136,7 @@ class BazaarService
     public function insertPack( $data , $line ){
 
         $searchTable = \MillionLiveMarketFilter\SearchTable::all();
+        $blackList = SearchBlackList::all()->pluck('card_name')->toArray();
 
         foreach( $data as $card ){
             $record = Bazaar::find( $card->id );
@@ -194,35 +196,37 @@ class BazaarService
                     ]);
 
                     foreach ($searchTable as $row) {
-                        if ($row->card_name && $card->name != $row->card_name) {
 
+                        if( in_array( $card->name  , $blackList ) ){
+                            continue;
+                        }
+
+                        if ($row->card_name && $card->name != $row->card_name) {
                             continue;
                         }
 
                         if ( $row->candy_or_drink !== null && $candyOrDrink != $row->candy_or_drink) {
-                            //\Log::info( $candyOrDrink );
+                            \Log::info( $candyOrDrink );
                             continue;
                         }
                         if ($row->skill && $skillPower != $row->skill) {
-                           // \Log::info( $skillPower );
+                            \Log::info( $skillPower );
                             continue;
                         }
                         if ($row->cost && $card->cost != $row->cost) {
-                          //  \Log::info( $card->cost );
+                            \Log::info( $card->cost );
                             continue;
                         }
 
                         if ($row->range && $row->range != $skillRange) {
-                            // \Log::info( $skillRange );
+                             \Log::info( $skillRange );
                             continue;
                         }
 
                         if ($row->price_less_than && ( $candyOrDrink == 0 || $row->price_less_than < $price ) ) {
-                           // \Log::info( $price );
+                            \Log::info( $price );
                             continue;
                         }
-
-
                         dispatch(new SendPlurk($row->plurk_id, $card, $line));
                     }
                     \DB::commit();
