@@ -1,8 +1,7 @@
 MillionLiveMarketFilter
 ====
-[アイドルマスター ミリオンライブ！（サビース終了）](https://www.bandainamcoent.co.jp/cs/list/idolmaster/million_live/)[*1] is a social game about idol. The player assumes the role of a novice producer who works with prospective pop idols through lessons, auditions and performances.
+[アイドルマスター ミリオンライブ！（サビース終了）](https://www.bandainamcoent.co.jp/cs/list/idolmaster/million_live/) is a social game about idol. The player assumes the role of a novice producer who works with prospective pop idols through lessons, auditions and performances.
 
-[*1]This contents is closed.
 
 There was a market system for players to trade cards, but every player may not in the same market. It depends on the reminder of playerID and 4. 
 The market will rotate every week. That means you can see the cards in other market.
